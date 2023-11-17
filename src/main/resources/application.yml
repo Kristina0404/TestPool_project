@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  mail:
+    username: ${username}
+    password: ${password}
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth:
+          starttls:
+            enable: true
+
+myapp:
+  maxPoints: 10
+  maxQuestions: 10
+
+
