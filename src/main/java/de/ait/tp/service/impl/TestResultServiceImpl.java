@@ -1,5 +1,6 @@
 package de.ait.tp.service.impl;
 
+import de.ait.tp.dto.AnswerDto;
 import de.ait.tp.dto.TestResultDto;
 import de.ait.tp.dto.TestTotalResultDto;
 import de.ait.tp.models.*;
@@ -110,8 +111,8 @@ public class TestResultServiceImpl implements TestResultService {
     public int calculateCorrectAnswers(Long userId, Long testId, List<Long> userAnswers) {
         int correctAnswersCount = 0;
         for (Long selectedAnswerId : userAnswers) {
-            boolean isCorrect = answersService.getCorrectAnswer(selectedAnswerId);
-            if (isCorrect) {
+            AnswerDto correctAnswer = answersService.getCorrectAnswer(selectedAnswerId);
+            if (correctAnswer !=null) {
                 correctAnswersCount++;
             }
         }

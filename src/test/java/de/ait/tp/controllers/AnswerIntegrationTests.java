@@ -7,6 +7,7 @@ import de.ait.tp.service.AnswersService;
 import org.junit.jupiter.api.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -16,10 +17,11 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.server.ResponseStatusException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -35,6 +37,11 @@ public class AnswerIntegrationTests {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private AnswersService answersService;
+
+
     @Nested
     @DisplayName("POST /answers:")
     public class addAnswer {
@@ -71,6 +78,7 @@ public class AnswerIntegrationTests {
 
         }
     }
+
     @org.junit.jupiter.api.Nested
     @DisplayName("GET answers:")
     public class GetQuestion {
@@ -177,17 +185,18 @@ public class AnswerIntegrationTests {
         }
     }
 
-    @Autowired
-    private AnswersService answersService;
+        @WithUserDetails(value = "kristina.romanova@gmail.com")
+        @Test
+        @Sql(scripts = "/sql/data.sql")
+        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+        public void return_correct_Answer() {
+            AnswerDto result = answersService.getCorrectAnswer(1L);
+            assertNotNull(result);
+            assertEquals("answer1", result.getAnswer());
+            assertTrue(result.isCorrect());
+            assertEquals(1L, result.getQuestionId());
 
-    @Test
-    @Sql(scripts = "/sql/data.sql")
-    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
-    public void testGetCorrectAnswer() {
-        Long selectedAnswerId = 1L;
-        boolean result = answersService.getCorrectAnswer(selectedAnswerId);
+        }
 
-        assertTrue(result);
-    }
 }
 

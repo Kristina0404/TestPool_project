@@ -4,7 +4,6 @@ import de.ait.tp.dto.*;
 import de.ait.tp.exceptions.RestException;
 import de.ait.tp.models.Question;
 import de.ait.tp.models.Answer;
-import de.ait.tp.models.Test;
 import de.ait.tp.repositories.AnswersRepository;
 import de.ait.tp.repositories.QuestionsRepository;
 import de.ait.tp.service.AnswersService;
@@ -14,14 +13,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import static de.ait.tp.dto.QuestionDto.from;
 import static de.ait.tp.dto.AnswerDto.from;
-import static de.ait.tp.models.Answer.*;
 
 @RequiredArgsConstructor
 @Service
@@ -79,16 +74,21 @@ public class AnswersServiceImpl implements AnswersService {
         return from(answer);
     }
 
-    public boolean getCorrectAnswer(Long selectedAnswerId) {
+    public AnswerDto getCorrectAnswer(Long selectedAnswerId) {
         List<Answer> correctAnswers = answersRepository.findAllById(selectedAnswerId);
         if (correctAnswers.size() == 1) {
             Answer selectedAnswer = correctAnswers.get(0);
-            return selectedAnswer.isCorrect();
+            return new AnswerDto(
+                    selectedAnswer.getId(),
+                    selectedAnswer.getAnswer(),
+                    selectedAnswer.isCorrect(),
+                    selectedAnswer.getQuestion().getId()
+            );
         } else if (correctAnswers.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Answer not found with id: " +
                     selectedAnswerId);
         }
-        return false;
+        return null;
     }
     private Question getQuestionOrThrow(Long questionId) {
         return questionsRepository.findById(questionId)

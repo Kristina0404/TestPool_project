@@ -44,13 +44,13 @@ public class AnswersController implements AnswersApi {
 
     @PreAuthorize("hasAnyAuthority('USER')")
     @Override
-    public ResponseEntity<String> getCorrectAnswer(Long selectedAnswerId) {
-        boolean isCorrect = answersService.getCorrectAnswer(selectedAnswerId);
+    public ResponseEntity<AnswerDto> getCorrectAnswer(Long selectedAnswerId) {
+        AnswerDto answer = answersService.getCorrectAnswer(selectedAnswerId);
 
-        if (isCorrect) {
-            return ResponseEntity.ok("Answer is  correct!");
+        if (answer != null ) {
+            return ResponseEntity.ok(answer);
         } else {
-            return ResponseEntity.ok("Answer is incorrect");
+            return ResponseEntity.notFound().build();
         }
     }
 

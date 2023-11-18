@@ -131,6 +131,6 @@ public interface AnswersApi {
                             schema = @Schema(implementation = StandardResponseDto.class)))
     })
     @PostMapping("/api/questions/{question_id}/answers/{answer_id}")
-    ResponseEntity<String> getCorrectAnswer(Long selectedAnswerId);
+    ResponseEntity<AnswerDto> getCorrectAnswer(Long selectedAnswerId);
 
 }

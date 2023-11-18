@@ -4,6 +4,7 @@ import de.ait.tp.controllers.api.SupportApi;
 import de.ait.tp.dto.SupportEmailRequest;
 import de.ait.tp.mail.SupportMailSender;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,8 +20,7 @@ public class SupportController implements SupportApi {
     public String sendSupportEmail(@RequestBody SupportEmailRequest emailRequest) {
         Authentication updateAuthentication = SecurityContextHolder.getContext().getAuthentication();;
         String senderEmail = updateAuthentication.getName();
-        supportMailSender.supportSend(senderEmail,
-                "testpool.ait@gmail.com", emailRequest.getSubject(), emailRequest.getText());
+        supportMailSender.supportSend(senderEmail, emailRequest.getSubject(), emailRequest.getText());
         return "Email sent successfully!";
     }
 }

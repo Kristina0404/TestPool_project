@@ -7,6 +7,7 @@ spring:
       ddl-auto: create-drop
 
   mail:
+    username: fake
     host: smtp.gmail.com
     port: 587
     properties:

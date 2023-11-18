@@ -30,7 +30,7 @@ public interface TestResultsApi {
     @ApiResponse(responseCode = "200", description = "Request processed successfully",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = TestTotalResultDto.class)))
-    @PostMapping("/api/tests/{test_id}/questions/{question_id}/answers/{answer_id}/saveResult")
+    @PostMapping("/api/tests/{test_id}/saveResult")
     TestTotalResultDto calculateAndSaveTestResult(
             @PathVariable("test_id") Long testId,
             @RequestParam List<Long> userAnswers,

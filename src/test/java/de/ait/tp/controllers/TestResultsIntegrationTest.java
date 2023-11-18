@@ -44,7 +44,7 @@ class TestResultsIntegrationTest {
         void return_calculated_and_saved_test() throws Exception {
 
             mockMvc.perform(post(
-                            "/api/tests/{test_id}/questions/{question_id}/answers/{answer_id}/saveResult", 1, 2, 3)
+                            "/api/tests/{test_id}/saveResult", 1, 2, 3)
                             .param("userId", String.valueOf(1))
                             .param("test_id", String.valueOf(1))
                             .param("maxPoints", String.valueOf(3))
