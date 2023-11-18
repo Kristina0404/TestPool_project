@@ -13,18 +13,15 @@ import javax.mail.internet.MimeMessage;
 @RequiredArgsConstructor
 public class SupportMailSender {
     private final JavaMailSender javaMailSender;
-    @Value("${spring.mail.username}")
-    private String senderEmail;
 
     @Async
-    public void supportSend(String from,String to,String subject,String text) {
+    public void supportSend(String senderEmail,String username,String subject,String text) {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message,"UTF-8");
 
         try {
-            helper.setFrom(from);
-           // helper.setFrom(senderEmail);
-            helper.setTo(to);
+            helper.setFrom(senderEmail);
+            helper.setTo(username);
             helper.setSubject(subject);
             helper.setText(text,true);
 

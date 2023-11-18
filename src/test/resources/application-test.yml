@@ -6,5 +6,26 @@ spring:
     hibernate:
       ddl-auto: update
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth:
+          starttls:
+            enable: true
+      debug: true
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
 base:
   url: test
+
+myapp:
+  maxPoints: 10
+  maxQuestions: 10

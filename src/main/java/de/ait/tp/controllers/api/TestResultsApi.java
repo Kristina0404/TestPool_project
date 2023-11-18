@@ -3,6 +3,7 @@ import de.ait.tp.dto.StandardResponseDto;
 import de.ait.tp.dto.TestResultDto;
 import de.ait.tp.dto.TestTotalResultDto;
 import de.ait.tp.models.TestResult;
+import de.ait.tp.security.details.AuthenticatedUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,9 +11,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.security.Principal;
 import java.util.List;
 
 @ApiResponse(responseCode = "401",
@@ -28,9 +31,10 @@ public interface TestResultsApi {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = TestTotalResultDto.class)))
     @PostMapping("/api/tests/{test_id}/questions/{question_id}/answers/{answer_id}/saveResult")
-    TestTotalResultDto calculateAndSaveTestResult(@PathParam("user_id") Long userId,
-                                   @PathVariable("test_id") Long testId,
-                                   @RequestParam List<Long> userAnswers);
+    TestTotalResultDto calculateAndSaveTestResult(
+            @PathVariable("test_id") Long testId,
+            @RequestParam List<Long> userAnswers,
+            Authentication authentication);
 
     @Operation(summary = "Get tests results for user ",
             description = "Available to user")

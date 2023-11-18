@@ -4,8 +4,7 @@ spring:
       ddl-auto: update
     show-sql: true
   mail:
-    username: ${username}
-    password: ${password}
+
     host: smtp.gmail.com
     port: 587
     properties:

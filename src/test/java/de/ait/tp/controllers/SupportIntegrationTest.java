@@ -41,7 +41,6 @@ class SupportIntegrationTest {
     @Sql(scripts = "/sql/data.sql")
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void supportSend_shouldSendEmail() {
-        // Arrange
         String from = "from@example.com";
         String to = "to@example.com";
         String subject = "Test Subject";
