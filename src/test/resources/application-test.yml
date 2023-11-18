@@ -2,10 +2,7 @@ spring:
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:/test_tp_db
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-
+  
   mail:
     username: fake
     host: smtp.gmail.com
