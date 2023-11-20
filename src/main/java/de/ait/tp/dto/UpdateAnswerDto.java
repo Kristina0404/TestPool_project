@@ -15,21 +15,21 @@ import javax.validation.constraints.Positive;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "UpdateAnswer",description = "Answer update " )
+@Schema(name = "UpdateAnswer", description = "Answer update ")
 public class UpdateAnswerDto {
 
     @Schema(description = "Answer_ID", example = "10")
     @Positive
     private Long id;
-    @Schema(description = "Answer",example= "answer1")
+    @Schema(description = "Answer", example = "answer1")
     @NotNull
     @NotBlank
     @NotEmpty
     private String answer;
-    @Schema(description = "Correct answer",example= "true")
+    @Schema(description = "Correct answer", example = "true")
     @NotNull
     private boolean isCorrect;
-    @Schema(description = "Question_ID",example= "2")
+    @Schema(description = "Question_ID", example = "2")
     @NotNull
     private Long questionId;
 }

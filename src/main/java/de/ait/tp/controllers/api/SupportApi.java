@@ -9,14 +9,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Tags(value = @Tag(name = "Support"))
 @Schema(name = "Support", description = "Contact with admin")
 public interface SupportApi {
-
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Request processed successfully",

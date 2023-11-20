@@ -44,7 +44,7 @@ public class TestResultDto {
     @Schema(description = "Test date")
     private LocalDate date;
     @Schema(description = "Percentage progress indicator")
-    private double  progressPercent;
+    private double progressPercent;
 
     public static TestResultDto from(TestResult testResult) {
         return TestResultDto.builder()
@@ -56,9 +56,7 @@ public class TestResultDto {
                 .progressPercent(testResult.getProgressPercent())
                 .build();
     }
-
-
-    public static List<TestResultDto> from(Collection<TestResult> testResults){
+    public static List<TestResultDto> from(Collection<TestResult> testResults) {
         return testResults.stream()
                 .map(TestResultDto::from).collect(Collectors.toList());
     }

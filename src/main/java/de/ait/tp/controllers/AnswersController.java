@@ -2,6 +2,8 @@ package de.ait.tp.controllers;
 
 import de.ait.tp.controllers.api.AnswersApi;
 import de.ait.tp.dto.*;
+import de.ait.tp.models.Answer;
+import de.ait.tp.repositories.AnswersRepository;
 import de.ait.tp.service.AnswersService;
 import de.ait.tp.service.QuestionsService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,6 +20,7 @@ public class AnswersController implements AnswersApi {
 
     private final AnswersService answersService;
     private final QuestionsService questionsService;
+    private final AnswersRepository answersRepository;
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @Override
@@ -45,10 +49,16 @@ public class AnswersController implements AnswersApi {
     @PreAuthorize("hasAnyAuthority('USER')")
     @Override
     public ResponseEntity<AnswerDto> getCorrectAnswer(Long selectedAnswerId) {
-        AnswerDto answer = answersService.getCorrectAnswer(selectedAnswerId);
+        Optional<Answer> answerOptional = answersRepository.findById(selectedAnswerId);
 
-        if (answer != null ) {
-            return ResponseEntity.ok(answer);
+        if (answerOptional.isPresent()) {
+            AnswerDto selectedAnswer = AnswerDto.from(answerOptional.get());
+            return ResponseEntity.ok(new AnswerDto(
+                    selectedAnswer.getId(),
+                    selectedAnswer.getAnswer(),
+                    selectedAnswer.isCorrect(),
+                    selectedAnswer.getQuestionId()
+            ));
         } else {
             return ResponseEntity.notFound().build();
         }

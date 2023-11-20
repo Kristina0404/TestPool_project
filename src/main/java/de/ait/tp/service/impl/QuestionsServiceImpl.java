@@ -27,7 +27,7 @@ import static de.ait.tp.dto.QuestionDto.from;
 @Component
 public class QuestionsServiceImpl implements QuestionsService {
 
-   @Value("${myapp.maxQuestions}")
+    @Value("${myapp.maxQuestions}")
     private int maxQuestions;
 
     private final QuestionsRepository questionsRepository;
@@ -89,7 +89,6 @@ public class QuestionsServiceImpl implements QuestionsService {
                 }
             }
         }
-
         return resultList;
     }
 
@@ -114,6 +113,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         questionsRepository.delete(question);
         return from(question);
     }
+
     private Test getTestOrThrow(Long testId) {
         return testsRepository.findById(testId)
                 .orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND,

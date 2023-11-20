@@ -42,7 +42,6 @@ public class TestDto {
                 .level(test.getLevel())
                 .build();
     }
-
     public static List<TestDto> from(Collection<Test> tests){
         return tests.stream()
                 .map(TestDto::from).collect(Collectors.toList());

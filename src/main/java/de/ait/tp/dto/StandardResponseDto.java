@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Schema(name = "Message", description = "Any message from the server")
 public class StandardResponseDto {
-    @Schema (description ="Maybe : error message , status change message etc" ,
+    @Schema(description = "Maybe : error message , status change message etc",
             example = "Error or any other message from the server")
     private String message;
-
 }

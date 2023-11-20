@@ -4,18 +4,19 @@ import de.ait.tp.dto.*;
 import de.ait.tp.exceptions.RestException;
 import de.ait.tp.models.Question;
 import de.ait.tp.models.Answer;
+import de.ait.tp.models.Test;
 import de.ait.tp.repositories.AnswersRepository;
 import de.ait.tp.repositories.QuestionsRepository;
+import de.ait.tp.repositories.TestsRepository;
 import de.ait.tp.service.AnswersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static de.ait.tp.dto.QuestionDto.from;
 import static de.ait.tp.dto.AnswerDto.from;
 
 @RequiredArgsConstructor
@@ -24,6 +25,8 @@ import static de.ait.tp.dto.AnswerDto.from;
 public class AnswersServiceImpl implements AnswersService {
     private final AnswersRepository answersRepository;
     private final QuestionsRepository questionsRepository;
+    private final TestsRepository testsRepository;
+
     @Override
     public AnswerDto addAnswerToQuestion(Long questionId, NewAnswerDto newAnswer) {
         Question question = getQuestionOrThrow(questionId);
@@ -44,11 +47,13 @@ public class AnswersServiceImpl implements AnswersService {
         return AnswerDto.from(answer);
 
     }
+
     @Override
     public List<AnswerDto> getAllAnswers() {
         List<Answer> answers = answersRepository.findAll();
         return AnswerDto.from(answers);
     }
+
     @Override
     public AnswerDto updateAnswerInQuestion(Long questionId, Long answerId, UpdateAnswerDto updateAnswer) {
         Question question = getQuestionOrThrow(questionId);
@@ -74,26 +79,25 @@ public class AnswersServiceImpl implements AnswersService {
         return from(answer);
     }
 
-    public AnswerDto getCorrectAnswer(Long selectedAnswerId) {
-        List<Answer> correctAnswers = answersRepository.findAllById(selectedAnswerId);
-        if (correctAnswers.size() == 1) {
-            Answer selectedAnswer = correctAnswers.get(0);
-            return new AnswerDto(
-                    selectedAnswer.getId(),
-                    selectedAnswer.getAnswer(),
-                    selectedAnswer.isCorrect(),
-                    selectedAnswer.getQuestion().getId()
-            );
-        } else if (correctAnswers.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Answer not found with id: " +
-                    selectedAnswerId);
+    @Override
+    public List<Long> getCorrectAnswerIds(Long testId) {
+        Test test = testsRepository.findById(testId)
+                .orElseThrow(() -> new RuntimeException("Тест не найден"));
+        List<Long> correctAnswerIds = new ArrayList<>();
+
+        for (Question question : test.getQuestions()) {
+            for (Answer answer : question.getAnswers()) {
+                if (answer.isCorrect()) {
+                    correctAnswerIds.add(answer.getId());
+                }
+            }
         }
-        return null;
+        return correctAnswerIds;
     }
+
     private Question getQuestionOrThrow(Long questionId) {
         return questionsRepository.findById(questionId)
                 .orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND,
                         "Question with id <" + questionId + "> not found"));
     }
-
 }

@@ -27,7 +27,6 @@ public class QuestionDto {
     @NotBlank
     @NotEmpty
     private Long id;
-
     @Schema(description = "Question", example = "What is an interface in Java?")
     @NotNull
     @NotBlank
@@ -41,19 +40,19 @@ public class QuestionDto {
 
 
     public static QuestionDto from(Question question) {
-        QuestionDto result= QuestionDto.builder()
+        QuestionDto result = QuestionDto.builder()
                 .id(question.getId())
                 .question(question.getQuestion())
                 .build();
 
-        if(question.getTest()!= null){
+        if (question.getTest() != null) {
             result.setTestId(question.getTest().getId());
         }
         return result;
     }
 
 
-    public static List<QuestionDto> from(Collection<Question> questions){
+    public static List<QuestionDto> from(Collection<Question> questions) {
         return questions.stream()
                 .map(QuestionDto::from).collect(Collectors.toList());
     }

@@ -26,7 +26,6 @@ import java.util.List;
 @Tags(value = @Tag(name = "Tests"))
 @Schema(name = "Test", description = "Test types")
 public interface TestsApi {
-
     @Operation(summary = "Adding a test", description = "Available to admin ")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Test added successfully",

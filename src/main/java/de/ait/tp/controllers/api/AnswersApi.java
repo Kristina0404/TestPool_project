@@ -130,7 +130,7 @@ public interface AnswersApi {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardResponseDto.class)))
     })
-    @PostMapping("/api/questions/{question_id}/answers/{answer_id}")
+    @GetMapping("/api/questions/{question_id}/answers/{answer_id}")
     ResponseEntity<AnswerDto> getCorrectAnswer(Long selectedAnswerId);
 
 }

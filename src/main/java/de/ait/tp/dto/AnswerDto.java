@@ -24,17 +24,17 @@ public class AnswerDto {
     @Schema(description = "Answer_ID", example = "1")
     @Positive
     private Long id;
-    @Schema(description = "Answer",example= "answer1")
+    @Schema(description = "Answer", example = "answer1")
     @NotNull
     @NotBlank
     @NotEmpty
     private String answer;
-    @Schema(description = "Correct answer",example= "true")
+    @Schema(description = "Correct answer", example = "true")
     @NotNull
     @NotBlank
     @NotEmpty
     private boolean isCorrect;
-    @Schema(description = "Question_ID",example= "2")
+    @Schema(description = "Question_ID", example = "2")
     @NotNull
     private Long questionId;
 
@@ -47,7 +47,7 @@ public class AnswerDto {
                 .build();
     }
 
-    public static List<AnswerDto> from(Collection<Answer> answers){
+    public static List<AnswerDto> from(Collection<Answer> answers) {
         return answers.stream()
                 .map(AnswerDto::from).collect(Collectors.toList());
     }

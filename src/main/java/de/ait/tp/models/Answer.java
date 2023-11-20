@@ -2,6 +2,7 @@ package de.ait.tp.models;
 
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public class Answer {
     @Column(nullable = false, length = 1000)
     private String answer;
     @Column(nullable = false)
-   // @ColumnDefault(value = "false")
+    // @ColumnDefault(value = "false")
     private boolean isCorrect;
     @ManyToOne
     @JoinColumn(name = "question_id")

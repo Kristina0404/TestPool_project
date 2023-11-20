@@ -1,7 +1,6 @@
 package de.ait.tp.controllers;
 
 import de.ait.tp.controllers.api.TestResultsApi;
-
 import de.ait.tp.dto.TestResultDto;
 import de.ait.tp.dto.TestTotalResultDto;
 import de.ait.tp.models.User;
@@ -29,17 +28,15 @@ public class TestResultController implements TestResultsApi {
     public TestTotalResultDto calculateAndSaveTestResult(Long testId, List<Long> userAnswers, Authentication authentication) {
         AuthenticatedUser authenticatedUser = (AuthenticatedUser) authentication.getPrincipal();
         String username = authenticatedUser.getUsername();
-        User user =usersRepository.findByEmail(username)
-                .orElseThrow(()-> new UsernameNotFoundException("User with email <" + username + "> not found"));
-       Long userId = user.getId();
-        return testResultService.calculateCorrectAnswersAndSum(userId,testId,userAnswers);
+        User user = usersRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User with email <" + username + "> not found"));
+        Long userId = user.getId();
+        return testResultService.calculateCorrectAnswersAndSum(userId, testId, userAnswers);
 
     }
 
     @Override
     public List<TestResultDto> getTestResultsForUser(Long userId) {
-       return testResultService.getTestResultsForUser(userId);
-
-   }
+        return testResultService.getTestResultsForUser(userId);
+    }
 }
-

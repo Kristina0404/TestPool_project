@@ -50,7 +50,7 @@ public class TestTotalResultDto {
     }
 
 
-    public static List<TestResultDto> from(Collection<TestResult> testResults){
+    public static List<TestResultDto> from(Collection<TestResult> testResults) {
         return testResults.stream()
                 .map(TestResultDto::from).collect(Collectors.toList());
     }

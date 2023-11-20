@@ -14,16 +14,17 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MailTemplatesUtil {
     private final Configuration freemarkerConfiguration;
+
     public String createConfirmationMail(User user, String link) {
         String html;
         try {
             Template template = freemarkerConfiguration.getTemplate("confirm_registration_mail.ftlh");
-            Map<String ,Object> model = new HashMap<>();
+            Map<String, Object> model = new HashMap<>();
             model.put("firstName", user.getFirstName());
             model.put("lastName", user.getLastName());
             model.put("link", link);
-            return FreeMarkerTemplateUtils.processTemplateIntoString(template,model);
-        } catch ( Exception e){
+            return FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+        } catch (Exception e) {
             throw new IllegalArgumentException(e);
         }
     }

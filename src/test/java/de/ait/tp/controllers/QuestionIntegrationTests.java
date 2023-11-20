@@ -16,6 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,6 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class QuestionIntegrationTests {
     @Autowired
     private MockMvc mockMvc;
+
     @Nested
     @DisplayName("POST /questions:")
     public class addQuestion {
@@ -44,14 +46,14 @@ public class QuestionIntegrationTests {
         @Sql(scripts = "/sql/data.sql")
         @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
         public void return_created_question() throws Exception {
-            mockMvc.perform(post("/api/tests/{test_id}/questions",1)
+            mockMvc.perform(post("/api/tests/{test_id}/questions", 1)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\n" +
                                     "  \"question\": \"What is b\",\n" +
                                     "  \"test_id\": 1\n" +
                                     "}"))
                     .andExpect(status().isCreated())
-                   .andExpect(jsonPath("$.id",equalTo(7)));
+                    .andExpect(jsonPath("$.id", equalTo(7)));
         }
 
         @WithUserDetails(value = "romanova@gmail.com")
@@ -59,7 +61,7 @@ public class QuestionIntegrationTests {
         @Sql(scripts = {"/sql/data.sql"})
         @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
         public void return_existed_question() throws Exception {
-            mockMvc.perform(post("/api/tests/{test_id}/questions",1)
+            mockMvc.perform(post("/api/tests/{test_id}/questions", 1)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\n" +
                                     "  \"question\": \"What is a?\",\n" +
@@ -79,7 +81,7 @@ public class QuestionIntegrationTests {
         @Sql(scripts = "/sql/data.sql")
         @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
         public void return_list_of_questions() throws Exception {
-            mockMvc.perform(get("/api/questions",1))
+            mockMvc.perform(get("/api/questions", 1))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$", hasSize(6)));
         }
@@ -158,6 +160,7 @@ public class QuestionIntegrationTests {
                 throw new RuntimeException(e);
             }
         }
+
         @WithUserDetails(value = "romanova@gmail.com")
         @Test
         @Sql(scripts = "/sql/data.sql")
@@ -183,7 +186,7 @@ public class QuestionIntegrationTests {
         @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
         public void return_list_of_random_questions() throws Exception {
 
-            List<Long> questions = Arrays.asList(1L,2L,3L,4L,5L,6L);
+            List<Long> questions = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L);
 
             QuestionsRepository questionsRepository = mock(QuestionsRepository.class);
             when(questionsRepository.getAllQuestionIdsByTestId(anyLong())).thenReturn(questions);

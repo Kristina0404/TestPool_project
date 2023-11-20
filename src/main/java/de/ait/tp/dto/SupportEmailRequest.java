@@ -23,6 +23,4 @@ public class SupportEmailRequest {
     @NotEmpty
     @NotBlank
     private String text;
-
-
 }

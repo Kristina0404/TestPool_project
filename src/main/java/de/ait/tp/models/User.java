@@ -23,8 +23,9 @@ public class User {
     public enum Role {
         ADMIN, USER
     }
+
     public enum State {
-        NOT_CONFIRM,CONFIRMED,DELETED,BANNED
+        NOT_CONFIRM, CONFIRMED, DELETED, BANNED
     }
 
     @Id
@@ -55,17 +56,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
     private List<TestTotalResult> testTotalResults;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_question",
-            joinColumns = @JoinColumn(name = "user_id",nullable = false, referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "question_id",
-                    nullable = false, referencedColumnName = "id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = { "user_id","question_id"}))
-    @ToString.Exclude
-    private Set<Question> questions;
-
 
     @Override
     public final boolean equals(Object o) {

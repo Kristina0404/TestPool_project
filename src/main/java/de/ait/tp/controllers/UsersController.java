@@ -24,20 +24,23 @@ public class UsersController implements UsersApi {
     }
 
     @Override
-    public UserDto getConfirmation(String confirmCode){
+    public UserDto getConfirmation(String confirmCode) {
         return usersService.confirm(confirmCode);
     }
+
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     @Override
     public UserDto getProfile(AuthenticatedUser user) {
         Long currentUserId = user.getId();
         return usersService.getUserById(currentUserId);
     }
+
     @Override
     @PreAuthorize("hasAnyAuthority('USER')")
     public UserDto updateUser(Long userId, UpdateUserDto updateUser) {
         return usersService.updateUser(userId, updateUser);
     }
+
     @PreAuthorize("hasAnyAuthority('USER')")
     @Override
     public UserDto deleteUser(Long userId) {
@@ -48,6 +51,5 @@ public class UsersController implements UsersApi {
     public List<UserDto> getAllUsers() {
         return usersService.getAllUsers();
     }
-
 
 }

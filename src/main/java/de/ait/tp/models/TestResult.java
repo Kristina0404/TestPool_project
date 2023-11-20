@@ -17,7 +17,7 @@ public class TestResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -31,7 +31,7 @@ public class TestResult {
     private int score;
     @Column(name = "date", nullable = false, length = 10)
     private LocalDate date;
-    @Column(name= " progress_percent", nullable = false)
+    @Column(name = " progress_percent", nullable = false)
     private double progressPercent;
 
 }

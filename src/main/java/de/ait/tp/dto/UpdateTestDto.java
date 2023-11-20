@@ -15,19 +15,19 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "UpdateTest",description = "Name,types or level update " )
+@Schema(name = "UpdateTest", description = "Name,types or level update ")
 public class UpdateTestDto {
     @Schema(description = "Test_ID", example = "1")
     private Long id;
-    @Schema(description = "Test name",example= "new Test")
+    @Schema(description = "Test name", example = "new Test")
     @NotNull
     @NotBlank
     @NotEmpty
     private String name;
-    @Schema(description = "Course type",example= "description of course")
+    @Schema(description = "Course type", example = "description of course")
     @NotNull
     private Test.Type type;
-    @Schema(description = "Knowledge level",example= "description of knowledge")
+    @Schema(description = "Knowledge level", example = "description of knowledge")
     @NotNull
     private Test.Level level;
 }

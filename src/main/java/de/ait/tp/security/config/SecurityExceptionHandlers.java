@@ -29,14 +29,12 @@ public class SecurityExceptionHandlers {
             fillResponse(response, HttpStatus.UNAUTHORIZED,
                     "Incorrect password or username");
 
-
     public static final AccessDeniedHandler ACCESS_DENIED_HANDLER = ((request, response, accessDeniedException) -> {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         fillResponse(response, HttpStatus.FORBIDDEN, "Access denied for user with this email< "
                 + authentication + "> and role" + authentication.getAuthorities());
     });
-
 
     public static final LogoutSuccessHandler LOGOUT_SUCCESS_HANDLER = (request, response, authentication) ->
             fillResponse(response, HttpStatus.OK, "Logout successful");

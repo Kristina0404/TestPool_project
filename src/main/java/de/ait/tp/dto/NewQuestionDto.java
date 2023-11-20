@@ -13,7 +13,6 @@ public class NewQuestionDto {
     @NotBlank
     @NotEmpty
     private String question;
-
 }
 
 

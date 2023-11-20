@@ -1,6 +1,7 @@
 package de.ait.tp.models;
 
 import lombok.*;
+
 import javax.persistence.*;
 
 @Getter
@@ -14,7 +15,7 @@ public class TestTotalResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

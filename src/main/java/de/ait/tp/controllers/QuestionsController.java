@@ -46,6 +46,5 @@ public class QuestionsController implements QuestionsApi {
     public List<QuestionWithAnswersDto> getAllQuestionIds(Long testId) {
         return questionsService.getAllQuestionIds(testId);
 
-
     }
 }

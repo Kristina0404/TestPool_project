@@ -21,13 +21,13 @@ public class ValidationExceptionHandler {
         List<ValidationErrorDto> validationErrors = new ArrayList<>();
         List<ObjectError> errors = e.getBindingResult().getAllErrors();
         for (ObjectError error : errors) {
-            FieldError fieldError = (FieldError)error;
+            FieldError fieldError = (FieldError) error;
 
             ValidationErrorDto errorDto = ValidationErrorDto.builder()
                     .field(fieldError.getField())
                     .message(fieldError.getDefaultMessage())
                     .build();
-            if(fieldError.getRejectedValue()!= null) {
+            if (fieldError.getRejectedValue() != null) {
                 errorDto.setRejectedValue(fieldError.getRejectedValue().toString());
             }
             validationErrors.add(errorDto);

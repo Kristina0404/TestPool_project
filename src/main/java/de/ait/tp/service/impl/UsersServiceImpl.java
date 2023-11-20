@@ -13,9 +13,6 @@ import de.ait.tp.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -59,6 +56,7 @@ public class UsersServiceImpl implements UsersService {
         mailSender.send(user.getEmail(), "Registration", html);
         return UserDto.from(user);
     }
+
     private String createLinkForConfirmation(String codeValue) {
         return baseUrl + "/confirm.html?id=" + codeValue;
 
@@ -115,30 +113,13 @@ public class UsersServiceImpl implements UsersService {
 
         return UserDto.from(user);
     }
+
     @Override
     public List<UserDto> getAllUsers() {
 
         return from(usersRepository.findAll());
     }
-    /*@Override
-    public Pagination getAllUsers(int page,int size,String orderBy,Boolean desc){
-        Sort sort =Sort.by(orderBy);
-        if (desc != null && desc) {
-            sort = sort.descending();
-        } else {
-            sort = sort.ascending();
-        }
 
-        PageRequest pageRequest = PageRequest.of(page, size, sort);
-        Page<User> pageResult = usersRepository.findAll(pageRequest);
-
-        return Pagination
-                .builder()
-                .users(from(pageResult.getContent()))
-                .totalPages(pageResult.getTotalPages())
-                .build();
-
-    }*/
     @Override
     public UserDto updateUser(Long userId, UpdateUserDto updateUser) {
 
@@ -150,6 +131,7 @@ public class UsersServiceImpl implements UsersService {
         usersRepository.save(user);
         return UserDto.from(user);
     }
+
     @Override
     public UserDto deleteUser(Long userId) {
         User user = usersRepository.findUserById(userId)
@@ -158,7 +140,6 @@ public class UsersServiceImpl implements UsersService {
         usersRepository.delete(user);
         return UserDto.from(user);
     }
-
 }
 
 

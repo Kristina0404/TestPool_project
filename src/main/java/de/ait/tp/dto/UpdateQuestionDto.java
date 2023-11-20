@@ -16,7 +16,7 @@ import javax.validation.constraints.Positive;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "UpdateQuestion",description = "Question update " )
+@Schema(name = "UpdateQuestion", description = "Question update ")
 public class UpdateQuestionDto {
 
     @Schema(description = "Question_ID", example = "11")
@@ -31,8 +31,6 @@ public class UpdateQuestionDto {
     @Positive
     @NotNull
     private Long testId;
-
-
 }
 
 

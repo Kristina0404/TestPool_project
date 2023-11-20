@@ -52,7 +52,6 @@ public class AllQuestionsDto {
         return result;
     }
 
-
     public static List<de.ait.tp.dto.QuestionDto> from(Collection<Question> questions) {
         return questions.stream()
                 .map(de.ait.tp.dto.QuestionDto::from).collect(Collectors.toList());

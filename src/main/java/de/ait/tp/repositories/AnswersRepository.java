@@ -8,14 +8,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+
 @Repository
 @Component
-public interface AnswersRepository extends JpaRepository<Answer,Long> {
+public interface AnswersRepository extends JpaRepository<Answer, Long> {
 
     List<Answer> findAnswersByQuestionId(Long randomId);
-    Optional<Answer> findByQuestionAndId(Question question, Long answerId);
 
-    List<Answer> findAllById(Long selectedAnswerId);
+    Optional<Answer> findByQuestionAndId(Question question, Long answerId);
 
     boolean existsByAnswerAndQuestionId(String answer, Long questionId);
 

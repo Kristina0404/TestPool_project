@@ -1,9 +1,8 @@
 package de.ait.tp.controllers.api;
+
 import de.ait.tp.dto.StandardResponseDto;
 import de.ait.tp.dto.TestResultDto;
 import de.ait.tp.dto.TestTotalResultDto;
-import de.ait.tp.models.TestResult;
-import de.ait.tp.security.details.AuthenticatedUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,8 +13,6 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-import java.security.Principal;
 import java.util.List;
 
 @ApiResponse(responseCode = "401",
@@ -51,6 +48,6 @@ public interface TestResultsApi {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardResponseDto.class)))
     })
- @GetMapping("/api/testResults/users/{user_id}")
+    @GetMapping("/api/testResults/users/{user_id}")
     List<TestResultDto> getTestResultsForUser(@PathVariable("user_id") Long userId);
 }

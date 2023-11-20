@@ -7,7 +7,6 @@ import de.ait.tp.service.AnswersService;
 import org.junit.jupiter.api.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -17,7 +16,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -40,7 +41,6 @@ public class AnswerIntegrationTests {
 
     @Autowired
     private AnswersService answersService;
-
 
     @Nested
     @DisplayName("POST /answers:")
@@ -185,18 +185,23 @@ public class AnswerIntegrationTests {
         }
     }
 
-        @WithUserDetails(value = "kristina.romanova@gmail.com")
-        @Test
-        @Sql(scripts = "/sql/data.sql")
-        @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
-        public void return_correct_Answer() {
-            AnswerDto result = answersService.getCorrectAnswer(1L);
-            assertNotNull(result);
-            assertEquals("answer1", result.getAnswer());
-            assertTrue(result.isCorrect());
-            assertEquals(1L, result.getQuestionId());
+    @WithUserDetails(value = "romanova@gmail.com")
+    @Test
+    @Sql(scripts = "/sql/data.sql")
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+    @Transactional
+    public void testGetCorrectAnswerIds() {
+        List<Long> correctAnswerIds = answersService.getCorrectAnswerIds(1L);
 
-        }
-
+        assertNotNull(correctAnswerIds);
+        assertFalse(correctAnswerIds.isEmpty());
+        assertEquals(6, correctAnswerIds.size());
+        assertTrue(correctAnswerIds.contains(1L));
+        assertFalse(correctAnswerIds.contains(2L)); // Этот ответ помечен как неверный
+        assertFalse(correctAnswerIds.contains(3L)); // Этот ответ помечен как неверный
+        assertFalse(correctAnswerIds.contains(4L)); // Этот ответ помечен как неверный
+        assertTrue(correctAnswerIds.contains(5L));
+        assertFalse(correctAnswerIds.contains(6L)); // Этот ответ помечен как неверный
+    }
 }
 

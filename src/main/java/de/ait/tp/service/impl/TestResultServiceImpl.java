@@ -1,13 +1,9 @@
 package de.ait.tp.service.impl;
 
-import de.ait.tp.dto.AnswerDto;
 import de.ait.tp.dto.TestResultDto;
 import de.ait.tp.dto.TestTotalResultDto;
 import de.ait.tp.models.*;
-import de.ait.tp.repositories.TestResultRepository;
-import de.ait.tp.repositories.TestTotalResultRepository;
-import de.ait.tp.repositories.TestsRepository;
-import de.ait.tp.repositories.UsersRepository;
+import de.ait.tp.repositories.*;
 import de.ait.tp.service.AnswersService;
 import de.ait.tp.service.TestResultService;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +13,13 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import static de.ait.tp.dto.TestTotalResultDto.from;
 
 @RequiredArgsConstructor
 @Service
 @Component
 public class TestResultServiceImpl implements TestResultService {
 
-   @Value("${myapp.maxPoints}")
+    @Value("${myapp.maxPoints}")
     private int maxPoints;
 
     private final TestResultRepository testResultRepository;
@@ -36,7 +31,7 @@ public class TestResultServiceImpl implements TestResultService {
     @Override
 
     public TestTotalResultDto calculateCorrectAnswersAndSum(Long userId, Long testId, List<Long> userAnswers) {
-      //  int maxPoints = 3;
+        //  int maxPoints = 3;
         TestResult previousResult = testResultRepository.findTopByUserIdAndTestIdOrderByIdDesc(userId, testId);
 
 
@@ -80,7 +75,7 @@ public class TestResultServiceImpl implements TestResultService {
     }
 
     @Override
-    public  TestTotalResultDto calculateTotalCorrectAnswers(Long userId) {
+    public TestTotalResultDto calculateTotalCorrectAnswers(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -107,15 +102,20 @@ public class TestResultServiceImpl implements TestResultService {
         return TestTotalResultDto.from(totalResult);
     }
 
-    @Override
     public int calculateCorrectAnswers(Long userId, Long testId, List<Long> userAnswers) {
         int correctAnswersCount = 0;
-        for (Long selectedAnswerId : userAnswers) {
-            AnswerDto correctAnswer = answersService.getCorrectAnswer(selectedAnswerId);
-            if (correctAnswer !=null) {
-                correctAnswersCount++;
+
+        Test test = testRepository.findById(testId)
+                .orElseThrow(() -> new RuntimeException("Тест не найден"));
+
+        for (Question question : test.getQuestions()) {
+            for (Answer answer : question.getAnswers()) {
+                if (userAnswers.contains(answer.getId()) && answer.isCorrect()) {
+                    correctAnswersCount++;
+                }
             }
         }
+
         return correctAnswersCount;
     }
 }

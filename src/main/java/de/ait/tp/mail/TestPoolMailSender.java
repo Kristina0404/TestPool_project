@@ -15,14 +15,14 @@ public class TestPoolMailSender {
     private final JavaMailSender javaMailSender;
 
     @Async
-    public void send(String email,String subject,String text) {
+    public void send(String email, String subject, String text) {
         MimeMessage message = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message,"UTF-8");
+        MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
 
         try {
             helper.setTo(email);
             helper.setSubject(subject);
-            helper.setText(text,true);
+            helper.setText(text, true);
         } catch (MessagingException e) {
             throw new IllegalArgumentException(e);
         }

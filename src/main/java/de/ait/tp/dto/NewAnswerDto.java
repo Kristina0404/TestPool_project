@@ -7,16 +7,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-@Schema(name= "NewAnswer")
+@Schema(name = "NewAnswer")
 public class NewAnswerDto {
-
-
-    @Schema(description = "Answer",example= "answer1")
+    @Schema(description = "Answer", example = "answer1")
     @NotNull
     @NotBlank
     @NotEmpty
     private String answer;
-    @Schema(description = "Correct answer",example= "true")
+    @Schema(description = "Correct answer", example = "true")
     @NotNull
     @NotBlank
     @NotEmpty

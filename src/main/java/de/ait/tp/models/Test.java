@@ -17,10 +17,11 @@ import java.util.Set;
 
 public class Test {
     public enum Type {
-        FRONTEND, BACKEND,QA
+        FRONTEND, BACKEND, QA
     }
+
     public enum Level {
-        JUNIOR, MIDDLE,MIDDLE_PLUS
+        JUNIOR, MIDDLE, MIDDLE_PLUS
     }
 
     @Id

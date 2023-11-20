@@ -4,7 +4,6 @@ import de.ait.tp.models.Question;
 import de.ait.tp.models.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,6 +13,7 @@ import java.util.Optional;
 public interface QuestionsRepository extends JpaRepository<Question, Long> {
 
     Optional<Question> findById(Long existsQuestionId);
+
     Optional<Question> findByTestAndId(Test test, Long questionId);
 
     Optional<Question> findQuestionById(Long questionId);

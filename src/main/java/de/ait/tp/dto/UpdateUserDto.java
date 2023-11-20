@@ -11,10 +11,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Schema(name = "UpdateUser",description = "Name,types or level update " )
+@Schema(name = "UpdateUser", description = "Name,types or level update ")
 
 public class UpdateUserDto {
-    @Schema(description = "User ID",example = "1")
+    @Schema(description = "User ID", example = "1")
     private Long id;
     @Schema(description = "User firstname", example = "Kristi")
     private String firstName;

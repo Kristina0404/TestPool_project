@@ -40,11 +40,13 @@ public class TestsServiceImpl implements TestsService {
         return TestDto.from(test);
 
     }
+
     @Override
     public List<TestDto> getAllTests() {
         List<Test> tests = testsRepository.findAll();
         return TestDto.from(tests);
     }
+
     @Override
     public TestDto updateTest(Long testId, UpdateTestDto updateTest) {
 

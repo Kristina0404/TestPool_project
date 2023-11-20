@@ -10,9 +10,11 @@ import java.util.Collections;
 
 public class AuthenticatedUser implements UserDetails {
     private final User user;
-    public AuthenticatedUser (User user){
+
+    public AuthenticatedUser(User user) {
         this.user = user;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString()));
@@ -33,6 +35,7 @@ public class AuthenticatedUser implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
+
     @Override
     public boolean isAccountNonLocked() {//аккаунт не заблокирован ?
         return !user.getState().equals(User.State.BANNED);
@@ -47,7 +50,8 @@ public class AuthenticatedUser implements UserDetails {
     public boolean isEnabled() {//аккаунт активен ?
         return user.getState().equals(User.State.CONFIRMED);
     }
-    public Long getId(){
+
+    public Long getId() {
         return this.user.getId();
     }
 }
