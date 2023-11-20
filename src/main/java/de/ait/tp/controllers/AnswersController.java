@@ -28,7 +28,7 @@ public class AnswersController implements AnswersApi {
         return answersService.addAnswerToQuestion(questionId, newAnswer);
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     @Override
     public List<AnswerDto> getAllAnswers() {
         return answersService.getAllAnswers();

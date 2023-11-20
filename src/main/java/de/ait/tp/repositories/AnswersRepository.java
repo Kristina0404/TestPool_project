@@ -19,4 +19,6 @@ public interface AnswersRepository extends JpaRepository<Answer, Long> {
 
     boolean existsByAnswerAndQuestionId(String answer, Long questionId);
 
+    List<Answer> findByIsCorrectTrue();
+
 }

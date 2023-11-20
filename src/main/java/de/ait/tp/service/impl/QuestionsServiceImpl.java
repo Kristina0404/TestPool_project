@@ -120,7 +120,29 @@ public class QuestionsServiceImpl implements QuestionsService {
                         "Test with id <" + testId + "> not found"));
     }
 
+   /* public List<QuestionCorrectAnswerDto> getQuestionsWithCorrectAnswers() {
+        List<Question> questions = questionsRepository.findAll();
+        List<Answer> correctAnswers = answersRepository.findByIsCorrectTrue();
+
+        List<QuestionCorrectAnswerDto> result = new ArrayList<>();
+        for (Question question : questions) {
+            for (Answer correctAnswer : correctAnswers) {
+                if (correctAnswer.getQuestion().getId().equals(question.getId())) {
+                    QuestionCorrectAnswerDto dto = new QuestionCorrectAnswerDto(
+                            question.getId(),
+                            question.getQuestion().getId(),
+                            correctAnswer.getId()
+                    );
+                    result.add(dto);
+                }
+            }
+        }
+
+        return result;
+    }*/
 }
+
+
 
 
 
