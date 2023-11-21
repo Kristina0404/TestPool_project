@@ -120,27 +120,49 @@ public class QuestionsServiceImpl implements QuestionsService {
                         "Test with id <" + testId + "> not found"));
     }
 
-   /* public List<QuestionCorrectAnswerDto> getQuestionsWithCorrectAnswers() {
-        List<Question> questions = questionsRepository.findAll();
+    @Override
+    public List<QuestionWithCorrectAnswerDto> getQuestionsWithCorrectAnswers() {
         List<Answer> correctAnswers = answersRepository.findByIsCorrectTrue();
+        List<QuestionWithCorrectAnswerDto> result = new ArrayList<>();
 
-        List<QuestionCorrectAnswerDto> result = new ArrayList<>();
-        for (Question question : questions) {
-            for (Answer correctAnswer : correctAnswers) {
-                if (correctAnswer.getQuestion().getId().equals(question.getId())) {
-                    QuestionCorrectAnswerDto dto = new QuestionCorrectAnswerDto(
-                            question.getId(),
-                            question.getQuestion().getId(),
-                            correctAnswer.getId()
-                    );
-                    result.add(dto);
-                }
-            }
+        for (Answer answer : correctAnswers) {
+            result.add(mapToDto(answer));
         }
 
         return result;
-    }*/
+    }
+
+    @Override
+    public QuestionWithCorrectAnswerDto mapToDto(Answer answer) {
+        QuestionWithCorrectAnswerDto dto = new QuestionWithCorrectAnswerDto();
+        dto.setQuestionId(answer.getQuestion().getId());
+        dto.setCorrectAnswerId(answer.getId());
+        dto.setQuestionText(answer.getQuestion().getQuestion());
+        dto.setCorrectAnswerText(answer.getAnswer());
+        return dto;
+    }
+
+    @Override
+    public QuestionWithCorrectAnswerDto getCorrectAnswerByQuestionId(Long questionId) {
+        Question question = questionsRepository.getById(questionId);
+        List<Answer> correctAnswers = answersRepository.findByQuestionIdAndIsCorrectTrue(questionId);
+        if (!correctAnswers.isEmpty()) {
+            Answer correctAnswer = correctAnswers.get(0);
+            QuestionWithCorrectAnswerDto resultDto = new QuestionWithCorrectAnswerDto();
+            resultDto.setQuestionId(question.getId());
+            resultDto.setCorrectAnswerId(correctAnswer.getId());
+            resultDto.setQuestionText(question.getQuestion());
+            resultDto.setCorrectAnswerText(correctAnswer.getAnswer());
+
+            return resultDto;
+        } else {
+            return null;
+        }
+    }
+
+
 }
+
 
 
 

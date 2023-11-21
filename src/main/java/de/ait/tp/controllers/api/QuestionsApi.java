@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -133,4 +134,45 @@ public interface QuestionsApi {
     @DeleteMapping("/api/tests/{test_id}/questions/{question_id}")
     QuestionDto deleteQuestionFromTest(@PathVariable("question_id") Long questionId);
 
+    @Operation(summary = "Get all the questions and the correct answers to them", description =
+            "Available to admin")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Request processed successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = QuestionWithCorrectAnswerDto.class))
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Question not found",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardResponseDto.class))),
+            @ApiResponse(responseCode = "403",
+                    description = "Forbidden, only admin available",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardResponseDto.class)))
+    })
+    @GetMapping("api/questions/{question_id}/with-correct-answers")
+    List<QuestionWithCorrectAnswerDto> getQuestionsWithCorrectAnswers();
+
+    @Operation(summary = "Get al the questions and the correct answers to them", description =
+            "Available to admin")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Request processed successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = QuestionWithCorrectAnswerDto.class))
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Question not found",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardResponseDto.class))),
+            @ApiResponse(responseCode = "403",
+                    description = "Forbidden, only admin available",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StandardResponseDto.class)))
+    })
+    @GetMapping("/api/questions/with-correct-answer/{question_id}")
+    ResponseEntity<QuestionWithCorrectAnswerDto> getCorrectAnswerByQuestionId(
+            @RequestParam(value = "question_id",required = true)
+            @PathVariable("question_id") Long questionId);
 }

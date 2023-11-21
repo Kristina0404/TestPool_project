@@ -1,13 +1,14 @@
 package de.ait.tp.controllers;
 
 import de.ait.tp.controllers.api.QuestionsApi;
-import de.ait.tp.dto.QuestionDto;
-import de.ait.tp.dto.NewQuestionDto;
-import de.ait.tp.dto.QuestionWithAnswersDto;
-import de.ait.tp.dto.UpdateQuestionDto;
+import de.ait.tp.dto.*;
+import de.ait.tp.models.QuestionWithCorrectAnswer;
+import de.ait.tp.service.AnswersService;
 import de.ait.tp.service.QuestionsService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 public class QuestionsController implements QuestionsApi {
     private final QuestionsService questionsService;
+    private final AnswersService answersService;
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @Override
@@ -47,4 +49,19 @@ public class QuestionsController implements QuestionsApi {
         return questionsService.getAllQuestionIds(testId);
 
     }
-}
+
+    public List<QuestionWithCorrectAnswerDto> getQuestionsWithCorrectAnswers() {
+        return questionsService.getQuestionsWithCorrectAnswers();
+    }
+    public ResponseEntity<QuestionWithCorrectAnswerDto> getCorrectAnswerByQuestionId( Long questionId) {
+        QuestionWithCorrectAnswerDto resultDto = questionsService.getCorrectAnswerByQuestionId(questionId);
+
+        if (resultDto != null) {
+            return new ResponseEntity<>(resultDto, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    }
+
+

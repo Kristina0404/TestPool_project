@@ -1,6 +1,7 @@
 package de.ait.tp.service;
 
 import de.ait.tp.dto.*;
+import de.ait.tp.models.Answer;
 
 import java.util.List;
 
@@ -10,12 +11,18 @@ public interface QuestionsService {
 
     QuestionDto addQuestionToTest(Long testId, NewQuestionDto newQuestion);
 
-    QuestionDto updateQuestionInTest(Long testId, Long questionId, UpdateQuestionDto updateQuestion);
 
     QuestionDto deleteQuestionFromTest(Long questionId);
 
+    QuestionDto updateQuestionInTest(Long testId, Long questionId, UpdateQuestionDto updateQuestion);
+
     List<QuestionWithAnswersDto> getAllQuestionIds(Long testId);
 
+    QuestionWithCorrectAnswerDto mapToDto(Answer answer);
+
+    List<QuestionWithCorrectAnswerDto> getQuestionsWithCorrectAnswers();
+
+    QuestionWithCorrectAnswerDto getCorrectAnswerByQuestionId(Long questionId);
 }
 
 
