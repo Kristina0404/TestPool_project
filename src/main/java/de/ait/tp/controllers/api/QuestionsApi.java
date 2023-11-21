@@ -140,7 +140,7 @@ public interface QuestionsApi {
             @ApiResponse(responseCode = "200",
                     description = "Request processed successfully",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = QuestionWithCorrectAnswerDto.class))
+                            schema = @Schema(implementation = AllQuestionsWithCorrectAnswerDto.class))
             ),
             @ApiResponse(responseCode = "404",
                     description = "Question not found",
@@ -154,8 +154,8 @@ public interface QuestionsApi {
     @GetMapping("api/questions/{question_id}/with-correct-answers")
     List<QuestionWithCorrectAnswerDto> getQuestionsWithCorrectAnswers();
 
-    @Operation(summary = "Get al the questions and the correct answers to them", description =
-            "Available to admin")
+    @Operation(summary = "Get the question and the correct answer", description =
+            "Available to user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Request processed successfully",

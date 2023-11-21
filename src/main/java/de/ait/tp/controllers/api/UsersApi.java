@@ -101,7 +101,7 @@ public interface UsersApi {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardResponseDto.class))),
             @ApiResponse(responseCode = "409",
-                    description = "Email, firstname or lastname already exists",
+                    description = "Firstname or lastname already exists",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardResponseDto.class))
             )
