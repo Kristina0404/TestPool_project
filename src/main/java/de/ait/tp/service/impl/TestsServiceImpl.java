@@ -1,7 +1,8 @@
 package de.ait.tp.service.impl;
 
-import de.ait.tp.dto.*;
-
+import de.ait.tp.dto.tests.NewTestDto;
+import de.ait.tp.dto.tests.TestDto;
+import de.ait.tp.dto.tests.UpdateTestDto;
 import de.ait.tp.exceptions.RestException;
 import de.ait.tp.models.Test;
 import de.ait.tp.repositories.TestsRepository;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static de.ait.tp.dto.TestDto.from;
+import static de.ait.tp.dto.tests.TestDto.from;
 
 @RequiredArgsConstructor
 @Service

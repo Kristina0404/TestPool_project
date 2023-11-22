@@ -1,6 +1,10 @@
 package de.ait.tp.controllers.api;
 
 import de.ait.tp.dto.*;
+import de.ait.tp.dto.answer.AllAnswersDto;
+import de.ait.tp.dto.answer.AnswerDto;
+import de.ait.tp.dto.answer.NewAnswerDto;
+import de.ait.tp.dto.answer.UpdateAnswerDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

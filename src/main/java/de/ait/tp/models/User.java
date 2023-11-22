@@ -30,9 +30,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false,length = 20)
+    @Column(length = 20)
     private String firstName;
-    @Column(nullable = false,length = 20)
+    @Column(length = 20)
     private String lastName;
     @Column(nullable = false, unique = true)
     private String email;

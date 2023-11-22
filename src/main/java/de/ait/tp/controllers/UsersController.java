@@ -1,7 +1,9 @@
 package de.ait.tp.controllers;
 
 import de.ait.tp.controllers.api.UsersApi;
-import de.ait.tp.dto.*;
+import de.ait.tp.dto.user.NewUserDto;
+import de.ait.tp.dto.user.UpdateUserDto;
+import de.ait.tp.dto.user.UserDto;
 import de.ait.tp.security.details.AuthenticatedUser;
 import de.ait.tp.service.TestResultService;
 import de.ait.tp.service.UsersService;
@@ -37,7 +39,7 @@ public class UsersController implements UsersApi {
 
     @Override
     @PreAuthorize("hasAnyAuthority('USER')")
-    public UserDto updateUser(Long userId, UpdateUserDto updateUser) {
+    public UpdateUserDto updateUser(Long userId, UpdateUserDto updateUser) {
         return usersService.updateUser(userId, updateUser);
     }
 

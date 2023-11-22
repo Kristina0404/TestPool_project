@@ -1,6 +1,10 @@
 package de.ait.tp.controllers.api;
 
 import de.ait.tp.dto.*;
+import de.ait.tp.dto.user.AllUsersDto;
+import de.ait.tp.dto.user.NewUserDto;
+import de.ait.tp.dto.user.UpdateUserDto;
+import de.ait.tp.dto.user.UserDto;
 import de.ait.tp.security.details.AuthenticatedUser;
 import de.ait.tp.validation.dto.ValidationErrorsDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -107,7 +111,7 @@ public interface UsersApi {
             )
     })
     @PutMapping("/{user_id}")
-    UserDto updateUser(@PathVariable("user_id") Long userId, UpdateUserDto updateUser);
+    UpdateUserDto updateUser(@PathVariable("user_id") Long userId, UpdateUserDto updateUser);
 
     @Operation(summary = "Delete User", description = "The user wants to leave our site" +
             "Available to user")

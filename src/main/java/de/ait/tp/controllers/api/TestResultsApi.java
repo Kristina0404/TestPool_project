@@ -1,8 +1,8 @@
 package de.ait.tp.controllers.api;
 
 import de.ait.tp.dto.StandardResponseDto;
-import de.ait.tp.dto.TestResultDto;
-import de.ait.tp.dto.TestTotalResultDto;
+import de.ait.tp.dto.tests.TestResultDto;
+import de.ait.tp.dto.tests.TestTotalResultDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

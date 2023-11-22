@@ -1,7 +1,9 @@
 package de.ait.tp.controllers;
 
 import de.ait.tp.controllers.api.AnswersApi;
-import de.ait.tp.dto.*;
+import de.ait.tp.dto.answer.AnswerDto;
+import de.ait.tp.dto.answer.NewAnswerDto;
+import de.ait.tp.dto.answer.UpdateAnswerDto;
 import de.ait.tp.models.Answer;
 import de.ait.tp.repositories.AnswersRepository;
 import de.ait.tp.service.AnswersService;

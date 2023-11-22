@@ -1,6 +1,5 @@
 package de.ait.tp.repositories;
 
-import de.ait.tp.dto.QuestionDto;
 import de.ait.tp.models.Question;
 import de.ait.tp.models.Test;
 import org.springframework.data.jpa.repository.JpaRepository;

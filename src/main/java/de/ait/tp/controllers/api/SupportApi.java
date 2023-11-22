@@ -1,6 +1,6 @@
 package de.ait.tp.controllers.api;
 
-import de.ait.tp.dto.AnswerDto;
+import de.ait.tp.dto.answer.AnswerDto;
 import de.ait.tp.dto.StandardResponseDto;
 import de.ait.tp.dto.SupportEmailRequest;
 import io.swagger.v3.oas.annotations.media.Content;

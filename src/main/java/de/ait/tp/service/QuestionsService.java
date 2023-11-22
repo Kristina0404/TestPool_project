@@ -1,6 +1,6 @@
 package de.ait.tp.service;
 
-import de.ait.tp.dto.*;
+import de.ait.tp.dto.question.*;
 import de.ait.tp.models.Answer;
 
 import java.util.List;

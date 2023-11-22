@@ -1,8 +1,8 @@
 package de.ait.tp.service;
 
-import de.ait.tp.dto.NewTestDto;
-import de.ait.tp.dto.TestDto;
-import de.ait.tp.dto.UpdateTestDto;
+import de.ait.tp.dto.tests.NewTestDto;
+import de.ait.tp.dto.tests.TestDto;
+import de.ait.tp.dto.tests.UpdateTestDto;
 
 import java.util.List;
 

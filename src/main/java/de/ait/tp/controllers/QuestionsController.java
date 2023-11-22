@@ -1,8 +1,7 @@
 package de.ait.tp.controllers;
 
 import de.ait.tp.controllers.api.QuestionsApi;
-import de.ait.tp.dto.*;
-import de.ait.tp.models.QuestionWithCorrectAnswer;
+import de.ait.tp.dto.question.*;
 import de.ait.tp.service.AnswersService;
 import de.ait.tp.service.QuestionsService;
 import lombok.RequiredArgsConstructor;

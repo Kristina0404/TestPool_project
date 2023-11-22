@@ -1,6 +1,8 @@
 package de.ait.tp.service.impl;
 
-import de.ait.tp.dto.*;
+import de.ait.tp.dto.answer.AnswerDto;
+import de.ait.tp.dto.answer.NewAnswerDto;
+import de.ait.tp.dto.answer.UpdateAnswerDto;
 import de.ait.tp.exceptions.RestException;
 import de.ait.tp.models.Question;
 import de.ait.tp.models.Answer;
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.ait.tp.dto.AnswerDto.from;
+import static de.ait.tp.dto.answer.AnswerDto.from;
 
 @RequiredArgsConstructor
 @Service

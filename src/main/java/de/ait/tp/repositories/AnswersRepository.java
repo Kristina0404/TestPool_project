@@ -23,4 +23,6 @@ public interface AnswersRepository extends JpaRepository<Answer, Long> {
 
 
     List<Answer> findByQuestionIdAndIsCorrectTrue(Long questionId);
+
+
 }

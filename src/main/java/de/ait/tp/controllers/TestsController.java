@@ -1,7 +1,9 @@
 package de.ait.tp.controllers;
 
 import de.ait.tp.controllers.api.TestsApi;
-import de.ait.tp.dto.*;
+import de.ait.tp.dto.tests.NewTestDto;
+import de.ait.tp.dto.tests.TestDto;
+import de.ait.tp.dto.tests.UpdateTestDto;
 import de.ait.tp.service.TestsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

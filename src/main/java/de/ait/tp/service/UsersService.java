@@ -1,8 +1,8 @@
 package de.ait.tp.service;
 
-import de.ait.tp.dto.NewUserDto;
-import de.ait.tp.dto.UpdateUserDto;
-import de.ait.tp.dto.UserDto;
+import de.ait.tp.dto.user.NewUserDto;
+import de.ait.tp.dto.user.UpdateUserDto;
+import de.ait.tp.dto.user.UserDto;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface UsersService {
 
     List<UserDto> getAllUsers();
 
-    UserDto updateUser(Long userId, UpdateUserDto updateUser);
+    UpdateUserDto updateUser(Long userId, UpdateUserDto updateUser);
 
     UserDto deleteUser(Long userId);
 }

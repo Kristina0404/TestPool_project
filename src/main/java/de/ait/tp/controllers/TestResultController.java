@@ -1,8 +1,8 @@
 package de.ait.tp.controllers;
 
 import de.ait.tp.controllers.api.TestResultsApi;
-import de.ait.tp.dto.TestResultDto;
-import de.ait.tp.dto.TestTotalResultDto;
+import de.ait.tp.dto.tests.TestResultDto;
+import de.ait.tp.dto.tests.TestTotalResultDto;
 import de.ait.tp.models.User;
 import de.ait.tp.repositories.UsersRepository;
 import de.ait.tp.security.details.AuthenticatedUser;

@@ -1,6 +1,10 @@
 package de.ait.tp.controllers.api;
 
 import de.ait.tp.dto.*;
+import de.ait.tp.dto.tests.AllTestsDto;
+import de.ait.tp.dto.tests.NewTestDto;
+import de.ait.tp.dto.tests.TestDto;
+import de.ait.tp.dto.tests.UpdateTestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

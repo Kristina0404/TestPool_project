@@ -1,6 +1,8 @@
 package de.ait.tp.service;
 
-import de.ait.tp.dto.*;
+import de.ait.tp.dto.answer.AnswerDto;
+import de.ait.tp.dto.answer.NewAnswerDto;
+import de.ait.tp.dto.answer.UpdateAnswerDto;
 
 import java.util.List;
 

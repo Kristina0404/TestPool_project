@@ -1,4 +1,4 @@
-package de.ait.tp.dto;
+package de.ait.tp.dto.question;
 
 import de.ait.tp.models.Answer;
 import de.ait.tp.models.Question;

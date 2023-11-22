@@ -1,4 +1,4 @@
-package de.ait.tp.dto;
+package de.ait.tp.dto.answer;
 
 import de.ait.tp.models.Answer;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,28 +19,27 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(description = "Array of all answers", example = "[{\"id\": 1," +
-        " \"answer\": \"answer1\", \"isCorrect\": \"true\",\"questionId\": 6}]")
-public class AllAnswersDto {
+public class AnswerDto {
 
-    @Schema(description = "Answer_ID")
+    @Schema(description = "Answer_ID", example = "1")
+    @Positive
     private Long id;
-    @Schema(description = "Answer")
+    @Schema(description = "Answer", example = "answer1")
     @NotNull
     @NotBlank
     @NotEmpty
     private String answer;
-    @Schema(description = "Correct answer")
+    @Schema(description = "Correct answer", example = "true")
     @NotNull
     @NotBlank
     @NotEmpty
     private boolean isCorrect;
-    @Schema(description = "Question_ID")
+    @Schema(description = "Question_ID", example = "2")
     @NotNull
     private Long questionId;
 
-    public static de.ait.tp.dto.AnswerDto from(Answer answer) {
-        return de.ait.tp.dto.AnswerDto.builder()
+    public static AnswerDto from(Answer answer) {
+        return AnswerDto.builder()
                 .id(answer.getId())
                 .answer(answer.getAnswer())
                 .isCorrect(answer.isCorrect())
@@ -47,10 +47,8 @@ public class AllAnswersDto {
                 .build();
     }
 
-    public static List<de.ait.tp.dto.AnswerDto> from(Collection<Answer> answers) {
+    public static List<AnswerDto> from(Collection<Answer> answers) {
         return answers.stream()
-                .map(de.ait.tp.dto.AnswerDto::from).collect(Collectors.toList());
+                .map(AnswerDto::from).collect(Collectors.toList());
     }
 }
-
-

@@ -2,7 +2,7 @@ package de.ait.tp.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ait.tp.config.TestSecurityConfig;
-import de.ait.tp.dto.AnswerDto;
+import de.ait.tp.dto.answer.AnswerDto;
 import de.ait.tp.service.AnswersService;
 import org.junit.jupiter.api.*;
 
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -100,11 +101,11 @@ public class AnswerIntegrationTests {
                     .andExpect(status().isUnauthorized());
         }
 
-        @WithUserDetails(value = "kristina.romanova@gmail.com")
+        @WithMockUser(value = "kristina.romanova@gmail.com")
         @Test
         @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
         public void return_403_for_not_admin() throws Exception {
-            mockMvc.perform(get("/api/answers", 4))
+            mockMvc.perform(get("/api/answers",4))
                     .andExpect(status().isForbidden());
         }
 
@@ -197,11 +198,11 @@ public class AnswerIntegrationTests {
         assertFalse(correctAnswerIds.isEmpty());
         assertEquals(6, correctAnswerIds.size());
         assertTrue(correctAnswerIds.contains(1L));
-        assertFalse(correctAnswerIds.contains(2L)); // Этот ответ помечен как неверный
-        assertFalse(correctAnswerIds.contains(3L)); // Этот ответ помечен как неверный
-        assertFalse(correctAnswerIds.contains(4L)); // Этот ответ помечен как неверный
+        assertFalse(correctAnswerIds.contains(2L));
+        assertFalse(correctAnswerIds.contains(3L));
+        assertFalse(correctAnswerIds.contains(4L));
         assertTrue(correctAnswerIds.contains(5L));
-        assertFalse(correctAnswerIds.contains(6L)); // Этот ответ помечен как неверный
+        assertFalse(correctAnswerIds.contains(6L));
     }
 }
 

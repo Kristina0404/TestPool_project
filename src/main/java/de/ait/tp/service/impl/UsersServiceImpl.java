@@ -1,6 +1,8 @@
 package de.ait.tp.service.impl;
 
-import de.ait.tp.dto.*;
+import de.ait.tp.dto.user.NewUserDto;
+import de.ait.tp.dto.user.UpdateUserDto;
+import de.ait.tp.dto.user.UserDto;
 import de.ait.tp.exceptions.RestException;
 import de.ait.tp.mail.MailTemplatesUtil;
 import de.ait.tp.mail.TestPoolMailSender;
@@ -22,7 +24,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import static de.ait.tp.dto.UserDto.from;
+import static de.ait.tp.dto.user.UserDto.from;
 
 
 @RequiredArgsConstructor
@@ -121,7 +123,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UserDto updateUser(Long userId, UpdateUserDto updateUser) {
+    public UpdateUserDto updateUser(Long userId, UpdateUserDto updateUser) {
 
         User user = usersRepository.findUserById(userId)
                 .orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND,
@@ -129,7 +131,7 @@ public class UsersServiceImpl implements UsersService {
         user.setFirstName(updateUser.getFirstName());
         user.setLastName(updateUser.getLastName());
         usersRepository.save(user);
-        return UserDto.from(user);
+        return UpdateUserDto.from(user);
     }
 
     @Override

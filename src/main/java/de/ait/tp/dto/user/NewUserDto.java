@@ -1,4 +1,4 @@
-package de.ait.tp.dto;
+package de.ait.tp.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -26,12 +26,8 @@ public class NewUserDto {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$")
     @Schema(description = "User password", example = "Qwerty007!")
     private String password;
-    @NotNull
-    @NotEmpty
     @Schema(description = "User first name", example = "Kristina")
     private String firstName;
-    @NotNull
-    @NotEmpty
     @Schema(description = "User last name", example = "Romanova")
     private String lastName;
 }

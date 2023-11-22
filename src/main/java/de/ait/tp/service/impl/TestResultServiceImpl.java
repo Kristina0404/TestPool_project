@@ -1,7 +1,7 @@
 package de.ait.tp.service.impl;
 
-import de.ait.tp.dto.TestResultDto;
-import de.ait.tp.dto.TestTotalResultDto;
+import de.ait.tp.dto.tests.TestResultDto;
+import de.ait.tp.dto.tests.TestTotalResultDto;
 import de.ait.tp.models.*;
 import de.ait.tp.repositories.*;
 import de.ait.tp.service.AnswersService;
@@ -31,7 +31,7 @@ public class TestResultServiceImpl implements TestResultService {
     @Override
 
     public TestTotalResultDto calculateCorrectAnswersAndSum(Long userId, Long testId, List<Long> userAnswers) {
-        //  int maxPoints = 3;
+
         TestResult previousResult = testResultRepository.findTopByUserIdAndTestIdOrderByIdDesc(userId, testId);
 
 

@@ -1,6 +1,7 @@
-package de.ait.tp.dto;
+package de.ait.tp.dto.question;
 
 import de.ait.tp.models.Question;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,23 +13,21 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(description = "Array of all questions", example = "[{\"id\": 1," +
-        " \"question\": \"What is an interface in Java?\", \"testId\": 5}]")
-public class AllQuestionsDto {
+public class QuestionDto {
 
     @Schema(description = "Question_ID", example = "1")
     @NotNull
     @NotBlank
     @NotEmpty
     private Long id;
-
-    @Schema(description = "Question", example = "")
+    @Schema(description = "Question", example = "What is an interface in Java?")
     @NotNull
     @NotBlank
     @NotEmpty
@@ -40,8 +39,8 @@ public class AllQuestionsDto {
     private Long testId;
 
 
-    public static de.ait.tp.dto.QuestionDto from(Question question) {
-        de.ait.tp.dto.QuestionDto result = de.ait.tp.dto.QuestionDto.builder()
+    public static QuestionDto from(Question question) {
+        QuestionDto result = QuestionDto.builder()
                 .id(question.getId())
                 .question(question.getQuestion())
                 .build();
@@ -52,11 +51,10 @@ public class AllQuestionsDto {
         return result;
     }
 
-    public static List<de.ait.tp.dto.QuestionDto> from(Collection<Question> questions) {
+
+    public static List<QuestionDto> from(Collection<Question> questions) {
         return questions.stream()
-                .map(de.ait.tp.dto.QuestionDto::from).collect(Collectors.toList());
+                .map(QuestionDto::from).collect(Collectors.toList());
     }
 
 }
-
-

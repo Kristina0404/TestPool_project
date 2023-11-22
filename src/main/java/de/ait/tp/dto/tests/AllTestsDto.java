@@ -1,4 +1,4 @@
-package de.ait.tp.dto;
+package de.ait.tp.dto.tests;
 
 import de.ait.tp.models.Test;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,19 +18,22 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TestDto {
-    @Schema(description = "Test_ID", example = "1")
+@Schema(description = "Array of all tests", example = "[{\"id\": 1," +
+        " \"name\": \"Backend for juniors\", \"type\": \"BACKEND\", \"level\": \"JUNIOR\"}]")
+public class AllTestsDto {
+
+    @Schema(description = "Test_ID")
     private Long id;
-    @Schema(description = "Test name",example= "new Test")
+    @Schema(description = "Test name")
     @NotNull
     @NotBlank
     @NotEmpty
     private String name;
-    @Schema(description = "Course type",example= "description of course")
+    @Schema(description = "Course type")
     @NotNull
     @NotBlank
     private Test.Type type;
-    @Schema(description = "Knowledge level",example= "description of knowledge")
+    @Schema(description = "Knowledge level")
     @NotNull
     private Test.Level level;
 
@@ -42,9 +45,11 @@ public class TestDto {
                 .level(test.getLevel())
                 .build();
     }
-    public static List<TestDto> from(Collection<Test> tests){
+
+    public static List<TestDto> from(Collection<Test> tests) {
         return tests.stream()
                 .map(TestDto::from).collect(Collectors.toList());
     }
 
 }
+

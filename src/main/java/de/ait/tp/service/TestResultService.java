@@ -1,7 +1,7 @@
 package de.ait.tp.service;
 
-import de.ait.tp.dto.TestResultDto;
-import de.ait.tp.dto.TestTotalResultDto;
+import de.ait.tp.dto.tests.TestResultDto;
+import de.ait.tp.dto.tests.TestTotalResultDto;
 
 import java.util.List;
 

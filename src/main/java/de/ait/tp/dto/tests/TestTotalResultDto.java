@@ -1,4 +1,4 @@
-package de.ait.tp.dto;
+package de.ait.tp.dto.tests;
 
 import de.ait.tp.models.TestResult;
 import de.ait.tp.models.TestTotalResult;

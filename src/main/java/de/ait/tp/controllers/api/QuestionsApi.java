@@ -1,6 +1,7 @@
 package de.ait.tp.controllers.api;
 
 import de.ait.tp.dto.*;
+import de.ait.tp.dto.question.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -151,7 +152,7 @@ public interface QuestionsApi {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardResponseDto.class)))
     })
-    @GetMapping("api/questions/{question_id}/with-correct-answers")
+    @GetMapping("api/questions/{question_id}/with_correct_answers")
     List<QuestionWithCorrectAnswerDto> getQuestionsWithCorrectAnswers();
 
     @Operation(summary = "Get the question and the correct answer", description =
@@ -171,7 +172,7 @@ public interface QuestionsApi {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardResponseDto.class)))
     })
-    @GetMapping("/api/questions/with-correct-answer/{question_id}")
+    @GetMapping("/api/questions/with_correct_answer/{question_id}")
     ResponseEntity<QuestionWithCorrectAnswerDto> getCorrectAnswerByQuestionId(
             @RequestParam(value = "question_id",required = true)
             @PathVariable("question_id") Long questionId);

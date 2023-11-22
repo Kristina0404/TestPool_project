@@ -2,7 +2,7 @@ package de.ait.tp.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ait.tp.config.TestSecurityConfig;
-import de.ait.tp.dto.TestDto;
+import de.ait.tp.dto.tests.TestDto;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

@@ -1,4 +1,4 @@
-package de.ait.tp.dto;
+package de.ait.tp.dto.tests;
 
 import de.ait.tp.models.Test;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,38 +18,33 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(description = "Array of all tests", example = "[{\"id\": 1," +
-        " \"name\": \"Backend for juniors\", \"type\": \"BACKEND\", \"level\": \"JUNIOR\"}]")
-public class AllTestsDto {
-
-    @Schema(description = "Test_ID")
+public class TestDto {
+    @Schema(description = "Test_ID", example = "1")
     private Long id;
-    @Schema(description = "Test name")
+    @Schema(description = "Test name",example= "new Test")
     @NotNull
     @NotBlank
     @NotEmpty
     private String name;
-    @Schema(description = "Course type")
+    @Schema(description = "Course type",example= "description of course")
     @NotNull
     @NotBlank
     private Test.Type type;
-    @Schema(description = "Knowledge level")
+    @Schema(description = "Knowledge level",example= "description of knowledge")
     @NotNull
     private Test.Level level;
 
-    public static de.ait.tp.dto.TestDto from(Test test) {
-        return de.ait.tp.dto.TestDto.builder()
+    public static TestDto from(Test test) {
+        return TestDto.builder()
                 .id(test.getId())
                 .name(test.getName())
                 .type(test.getType())
                 .level(test.getLevel())
                 .build();
     }
-
-    public static List<de.ait.tp.dto.TestDto> from(Collection<Test> tests) {
+    public static List<TestDto> from(Collection<Test> tests){
         return tests.stream()
-                .map(de.ait.tp.dto.TestDto::from).collect(Collectors.toList());
+                .map(TestDto::from).collect(Collectors.toList());
     }
 
 }
-
