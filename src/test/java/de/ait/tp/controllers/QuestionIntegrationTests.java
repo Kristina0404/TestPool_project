@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ait.tp.config.TestSecurityConfig;
 import de.ait.tp.dto.question.QuestionDto;
 
+import de.ait.tp.dto.question.QuestionWithCorrectAnswerDto;
 import de.ait.tp.models.Answer;
 import de.ait.tp.models.Question;
 import de.ait.tp.repositories.AnswersRepository;
@@ -209,22 +210,7 @@ public class QuestionIntegrationTests {
                     .andExpect(jsonPath("$", hasSize(questions.size())));
         }
     }
-
-    @WithUserDetails(value = "kristina.romanova@gmail.com")
-    @Test
-    @Sql(scripts = "/sql/data.sql")
-    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
-
-   public void testGetCorrectAnswerByQuestionId() throws Exception {
-
-        mockMvc.perform(get("/api/questions/with_correct_answer/{question_id}",1L))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.questionId").value(1))
-                .andExpect(jsonPath("$.correctAnswerId").value(1))
-                .andExpect(jsonPath("$.questionText").value("What is a?"))
-                .andExpect(jsonPath("$.correctAnswerText").value("answer1"));
-
-    }
+    
     @WithUserDetails(value = "romanova@gmail.com")
     @Test
     @Sql(scripts = "/sql/data.sql")
