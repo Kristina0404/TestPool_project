@@ -19,7 +19,7 @@ spring:
             enable: true
 
 myapp:
-  maxPoints: 33
-  maxQuestions: 33
+  maxPoints: 10
+  maxQuestions: 10
 
 

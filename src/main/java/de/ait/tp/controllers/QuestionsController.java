@@ -44,14 +44,16 @@ public class QuestionsController implements QuestionsApi {
     }
 
     @PreAuthorize("hasAnyAuthority('USER')")
+    @Override
     public List<QuestionWithAnswersDto> getAllQuestionIds(Long testId) {
         return questionsService.getAllQuestionIds(testId);
 
     }
-
+@Override
     public List<QuestionWithCorrectAnswerDto> getQuestionsWithCorrectAnswers() {
         return questionsService.getQuestionsWithCorrectAnswers();
     }
+    @Override
     public ResponseEntity<QuestionWithCorrectAnswerDto> getCorrectAnswerByQuestionId( Long questionId) {
         QuestionWithCorrectAnswerDto resultDto = questionsService.getCorrectAnswerByQuestionId(questionId);
 

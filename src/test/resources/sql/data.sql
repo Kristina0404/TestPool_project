@@ -6,20 +6,19 @@ insert into account(id,email, hash_password,role ,state) values (2,'romanova@gma
 insert into test(level,name,type) values ('JUNIOR','frontend','FRONTEND');
 
 
-insert into question(question,test_id) values('What is a?',1);
-insert into question(question,test_id) values('What is c?',1);
-insert into question(question,test_id) values('What is d?',1);
-insert into question(question,test_id) values('What is e?',1);
-insert into question(question,test_id) values('What is f?',1);
-insert into question(question,test_id) values('What is g?',1);
+insert into question(question,test_id) values ('What is a?',1);
+insert into question(question,test_id) values ('What is c?',1);
+insert into question(question,test_id) values ('What is d?',1);
+insert into question(question,test_id) values ('What is e?',1);
+insert into question(question,test_id) values ('What is f?',1);
+insert into question(question,test_id) values ('What is g?',1);
 
 
+insert into answer(answer,is_correct,question_id) values ('answer1',true,1);
+insert into answer(answer,is_correct,question_id) values ('answer1',false,1);
+insert into answer(answer,is_correct,question_id) values ('answer1',false,1);
+insert into answer(answer,is_correct,question_id) values ('answer1',false,1);
 
-
-insert into answer(answer,is_correct,question_id) values('answer1',true,1);
-insert into answer(answer,is_correct,question_id) values('answer2',false,1);
-insert into answer(answer,is_correct,question_id) values('answer3',false,1);
-insert into answer(answer,is_correct,question_id) values('answer4',false,1);
 
 insert into answer(answer,is_correct,question_id) values('answer1',true,2);
 insert into answer(answer,is_correct,question_id) values('answer2',false,2);
@@ -45,7 +44,6 @@ insert into answer(answer,is_correct,question_id) values('answer1',true,6);
 insert into answer(answer,is_correct,question_id) values('answer2',false,6);
 insert into answer(answer,is_correct,question_id) values('answer3',false,6);
 insert into answer(answer,is_correct,question_id) values('answer4',false,6);
-
 
 
 
