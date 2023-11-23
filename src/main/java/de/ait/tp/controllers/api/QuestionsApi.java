@@ -172,7 +172,7 @@ public interface QuestionsApi {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardResponseDto.class)))
     })
-    @GetMapping("/api/questions/with_correct_answers/{question_id}")
+    @GetMapping("/api/questions/{question_id}/with_correct_answer")
     ResponseEntity<QuestionWithCorrectAnswerDto> getCorrectAnswerByQuestionId(
             @RequestParam(value = "question_id",required = true)
             @PathVariable("question_id") Long questionId);
