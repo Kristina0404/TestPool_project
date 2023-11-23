@@ -210,7 +210,7 @@ public class QuestionIntegrationTests {
                     .andExpect(jsonPath("$", hasSize(questions.size())));
         }
     }
-    
+
     @WithUserDetails(value = "romanova@gmail.com")
     @Test
     @Sql(scripts = "/sql/data.sql")
