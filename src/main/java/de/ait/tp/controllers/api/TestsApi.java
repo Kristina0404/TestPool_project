@@ -96,5 +96,4 @@ public interface TestsApi {
     @DeleteMapping("api/tests/{test_id}")
     TestDto deleteTest(@PathVariable("test_id") Long testId);
 
-
 }

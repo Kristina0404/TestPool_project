@@ -49,12 +49,14 @@ public class QuestionsController implements QuestionsApi {
         return questionsService.getAllQuestionIds(testId);
 
     }
-@Override
+
+    @Override
     public List<QuestionWithCorrectAnswerDto> getQuestionsWithCorrectAnswers() {
         return questionsService.getQuestionsWithCorrectAnswers();
     }
+
     @Override
-    public ResponseEntity<QuestionWithCorrectAnswerDto> getCorrectAnswerByQuestionId( Long questionId) {
+    public ResponseEntity<QuestionWithCorrectAnswerDto> getCorrectAnswerByQuestionId(Long questionId) {
         QuestionWithCorrectAnswerDto resultDto = questionsService.getCorrectAnswerByQuestionId(questionId);
 
         if (resultDto != null) {
@@ -63,6 +65,6 @@ public class QuestionsController implements QuestionsApi {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    }
+}
 
 

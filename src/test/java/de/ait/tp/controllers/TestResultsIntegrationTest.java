@@ -62,8 +62,6 @@ class TestResultsIntegrationTest {
         }
 
     }
-
-
     @Nested
     @DisplayName("GET test results for user :")
     public class GetTestResultsTests {

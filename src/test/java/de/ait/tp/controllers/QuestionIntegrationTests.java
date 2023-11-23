@@ -3,26 +3,18 @@ package de.ait.tp.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ait.tp.config.TestSecurityConfig;
 import de.ait.tp.dto.question.QuestionDto;
-import de.ait.tp.dto.question.QuestionWithCorrectAnswerDto;
-import de.ait.tp.dto.tests.TestDto;
+
 import de.ait.tp.models.Answer;
 import de.ait.tp.models.Question;
-
-
-import de.ait.tp.models.QuestionWithCorrectAnswer;
-import de.ait.tp.models.TestResult;
 import de.ait.tp.repositories.AnswersRepository;
 import de.ait.tp.repositories.QuestionsRepository;
 import de.ait.tp.repositories.TestResultRepository;
 import de.ait.tp.repositories.TestsRepository;
 import de.ait.tp.service.QuestionsService;
-import de.ait.tp.service.impl.QuestionsServiceImpl;
-import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.junit.jupiter.api.*;
 
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,23 +23,18 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.util.AssertionErrors;
+
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest(classes = TestSecurityConfig.class)
 @AutoConfigureMockMvc
@@ -59,13 +46,6 @@ import static org.mockito.Mockito.*;
 public class QuestionIntegrationTests {
     @Autowired
     private MockMvc mockMvc;
-    @Mock
-    QuestionsService questionsService;
-    @Mock
-    QuestionsRepository questionsRepository;
-    @Mock
-    AnswersRepository answersRepository;
-
     @Nested
     @DisplayName("POST /questions:")
     public class addQuestion {
@@ -230,22 +210,44 @@ public class QuestionIntegrationTests {
         }
     }
 
-
-  /*  @WithUserDetails(value = "kristina.romanova@gmail.com")
+    @WithUserDetails(value = "kristina.romanova@gmail.com")
     @Test
     @Sql(scripts = "/sql/data.sql")
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
 
    public void testGetCorrectAnswerByQuestionId() throws Exception {
-        Long questionId =1L;
-        mockMvc.perform(get("/api/questions/with_correct_answer/{question_id}",1))
+
+        mockMvc.perform(get("/api/questions/with_correct_answer/{question_id}",1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.questionId").value(1))
-                .andExpect(jsonPath("$.answerId").value(1))
-                .andExpect(jsonPath("$.question").value("What is a?"))
-                .andExpect(jsonPath("$.answer").value("answer1"));
+                .andExpect(jsonPath("$.correctAnswerId").value(1))
+                .andExpect(jsonPath("$.questionText").value("What is a?"))
+                .andExpect(jsonPath("$.correctAnswerText").value("answer1"));
 
-    }*/
+    }
+    @WithUserDetails(value = "romanova@gmail.com")
+    @Test
+    @Sql(scripts = "/sql/data.sql")
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
+    public void testGetQuestionsWithCorrectAnswers() throws Exception {
+
+        List<Long> questions = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L);
+        List<Long> correctAnswers=Arrays.asList(1L,5L,9L,13L,17L,21L);
+
+        QuestionsRepository questionsRepository = mock(QuestionsRepository.class);
+        AnswersRepository answersRepository=mock(AnswersRepository.class);
+        when(questionsRepository.getAllQuestionIdsByTestId(anyLong())).thenReturn(questions);
+        when(answersRepository.findByQuestionIdAndIsCorrectTrue(anyLong())).thenReturn(correctAnswers.stream().map(answerId -> {
+            Answer answer = new Answer();
+            answer.setId(answerId);
+            return answer;
+        }).collect(Collectors.toList()));
+        mockMvc.perform(get("/api/questions/with_correct_answers"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(questions.size())))
+                .andExpect(jsonPath("$", hasSize(correctAnswers.size())));
+    }
 }
 
 

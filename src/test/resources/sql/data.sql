@@ -45,8 +45,4 @@ insert into answer(answer,is_correct,question_id) values('answer2',false,6);
 insert into answer(answer,is_correct,question_id) values('answer3',false,6);
 insert into answer(answer,is_correct,question_id) values('answer4',false,6);
 
-
-
-
-
 SELECT * FROM question WHERE test_id = 1 ORDER BY RANDOM() LIMIT 3;

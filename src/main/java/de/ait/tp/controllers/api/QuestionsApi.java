@@ -152,7 +152,7 @@ public interface QuestionsApi {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = StandardResponseDto.class)))
     })
-    @GetMapping("api/questions/{question_id}/with_correct_answers")
+    @GetMapping("api/questions/with_correct_answers")
     List<QuestionWithCorrectAnswerDto> getQuestionsWithCorrectAnswers();
 
     @Operation(summary = "Get the question and the correct answer", description =
@@ -174,6 +174,6 @@ public interface QuestionsApi {
     })
     @GetMapping("/api/questions/with_correct_answer/{question_id}")
     ResponseEntity<QuestionWithCorrectAnswerDto> getCorrectAnswerByQuestionId(
-            @RequestParam(value = "question_id",required = true)
+           // @RequestParam(value = "question_id",required = true)
             @PathVariable("question_id") Long questionId);
 }

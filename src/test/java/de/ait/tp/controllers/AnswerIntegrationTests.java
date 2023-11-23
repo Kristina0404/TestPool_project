@@ -105,7 +105,7 @@ public class AnswerIntegrationTests {
         @Test
         @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
         public void return_403_for_not_admin() throws Exception {
-            mockMvc.perform(get("/api/answers",4))
+            mockMvc.perform(get("/api/answers", 4))
                     .andExpect(status().isForbidden());
         }
 

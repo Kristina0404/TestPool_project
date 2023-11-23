@@ -14,7 +14,6 @@ insert into question(question,test_id) values('What is g?',1);
 
 SELECT * FROM question WHERE test_id = 1 ORDER BY RANDOM() LIMIT 3;
 
-
 insert into answer(answer,is_correct,question_id) values('answer1',true,1);
 insert into answer(answer,is_correct,question_id) values('answer2',false,1);
 insert into answer(answer,is_correct,question_id) values('answer3',false,1);
