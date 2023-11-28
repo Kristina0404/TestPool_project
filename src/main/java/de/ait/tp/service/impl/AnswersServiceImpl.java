@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class AnswersServiceImpl implements AnswersService {
     private final TestsRepository testsRepository;
 
     @Override
+    @Transactional
     public AnswerDto addAnswerToQuestion(Long questionId, NewAnswerDto newAnswer) {
         Question question = getQuestionOrThrow(questionId);
 

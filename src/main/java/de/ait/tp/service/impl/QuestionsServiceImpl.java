@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -34,6 +35,7 @@ public class QuestionsServiceImpl implements QuestionsService {
     private final AnswersRepository answersRepository;
 
     @Override
+    @Transactional
     public QuestionDto addQuestionToTest(Long testId, NewQuestionDto newQuestion) {
         Test test = getTestOrThrow(testId);
         if (questionsRepository.existsByQuestionAndTestId(newQuestion.getQuestion(), testId)) {
