@@ -48,7 +48,7 @@ public class AnswersController implements AnswersApi {
         return answersService.deleteAnswerFromQuestion(questionId, answerId);
     }
 
-    @PreAuthorize("hasAnyAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     @Override
     public ResponseEntity<AnswerDto> getCorrectAnswer(Long selectedAnswerId) {
         Optional<Answer> answerOptional = answersRepository.findById(selectedAnswerId);
