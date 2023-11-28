@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class TestDto {
     @Schema(description = "Test_ID", example = "1")
     private Long id;
-    @Schema(description = "Test name",example= "new Test")
+    @Schema(description = "Test name", example= "new Test")
     @NotNull
     @NotBlank
     @NotEmpty
