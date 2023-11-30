@@ -83,7 +83,10 @@ public class TestResultServiceImpl implements TestResultService {
         int totalCorrectAnswers = 0;
         int totalTestsTaken = testResults.size();
         for (TestResult result : testResults) {
-            totalCorrectAnswers += result.getScore();
+            if(result != null){
+                totalCorrectAnswers += result.getScore();
+            }
+
         }
         List<TestTotalResult> testTotalResults = testTotalResultRepository
                 .findByUserIdOrderByTotalCorrectAnswerDesc(userId);
