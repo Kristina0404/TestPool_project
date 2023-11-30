@@ -30,7 +30,6 @@ public class TestTotalResultDto {
     @NotEmpty
     private Long userId;
     @Schema(description = "total result score", example = "100")
-    @NotNull
     @NotBlank
     @NotEmpty
     private int totalCorrectAnswer;
