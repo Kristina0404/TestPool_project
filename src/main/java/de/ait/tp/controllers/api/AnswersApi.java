@@ -136,7 +136,7 @@ public interface AnswersApi {
     })
     @GetMapping("/api/questions/{question_id}/answers/{answer_id}")
     ResponseEntity<AnswerDto> getCorrectAnswer(
-            @PathVariable("question_id")  Long question_id,
+           // @PathVariable("question_id")  Long question_id,
             @PathVariable("answer_id") Long selectedAnswerId);
 
 }
