@@ -50,7 +50,7 @@ public class AnswersController implements AnswersApi {
 
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     @Override
-    public ResponseEntity<AnswerDto> getCorrectAnswer(Long selectedAnswerId) {
+    public ResponseEntity<AnswerDto> getCorrectAnswer(Long questionId,Long selectedAnswerId) {
         Optional<Answer> answerOptional = answersRepository.findById(selectedAnswerId);
 
         if (answerOptional.isPresent()) {
