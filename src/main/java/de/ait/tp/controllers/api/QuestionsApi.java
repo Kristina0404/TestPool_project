@@ -174,7 +174,6 @@ public interface QuestionsApi {
     })
     @GetMapping("/api/questions/with_correct_answer/{question_id}")
     ResponseEntity<QuestionWithCorrectAnswerDto> getCorrectAnswerByQuestionId(
-            @RequestParam(value = "question_id",required = true)
+           // @RequestParam(value = "question_id",required = true)
             @PathVariable("question_id") Long questionId);
-
 }
