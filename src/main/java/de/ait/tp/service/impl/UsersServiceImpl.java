@@ -60,7 +60,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     private String createLinkForConfirmation(String codeValue) {
-        return baseUrl + "/#/confirm.html?id=" + codeValue;
+        return baseUrl + "#/confirm.html?id=" + codeValue;
 
     }
 
