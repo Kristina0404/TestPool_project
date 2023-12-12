@@ -38,7 +38,7 @@ public class UsersServiceImpl implements UsersService {
     private final MailTemplatesUtil mailTemplatesUtil;
 
 
-    @Value("${base.url}")
+    @Value("${base.url}/testpool-fe/index.html#/auth/login")
     private String baseUrl;
 
     @Transactional
