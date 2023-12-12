@@ -23,7 +23,7 @@ myapp:
   maxQuestions: 10
 
 base:
-  url: https://testpool-app-3g73f.ondigitalocean.app
+  url: https://testpool-app-3g73f.ondigitalocean.app/
 
 
 
