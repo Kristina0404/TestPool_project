@@ -44,7 +44,7 @@ public class AppConfig {
                 ))
                 .components(new Components()
                         .addSchemas("EmailAndPassword", emailAndPassword())
-                        .addSecuritySchemes("cookieAuth", securityScheme())
+                       .addSecuritySchemes("cookieAuth", securityScheme())
                         .addSchemas("StandardResponseDto", resolvedSchema.schema.description("StandardResponseDto")))
                 .addSecurityItem(buildSecurity())
                 .paths(buildAuthenticationPath())

@@ -26,7 +26,7 @@ logging:
       springframework:
         security: DEBUG
 base:
-  url: https://${NGROK_ID}.ngrok-free.app
+  url: https://testpool-app-3g73f.ondigitalocean.app/
 
 myapp:
   maxPoints: 10

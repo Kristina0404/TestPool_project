@@ -54,13 +54,13 @@ public class UsersServiceImpl implements UsersService {
 
         String link = createLinkForConfirmation(codeValue);
         String html = mailTemplatesUtil.createConfirmationMail(user, link);
-
         mailSender.send(user.getEmail(), "Registration", html);
+
         return UserDto.from(user);
     }
 
     private String createLinkForConfirmation(String codeValue) {
-        return baseUrl + "/confirm.html?id=" + codeValue;
+        return baseUrl + "/#/confirm.html?id=" + codeValue;
 
     }
 
