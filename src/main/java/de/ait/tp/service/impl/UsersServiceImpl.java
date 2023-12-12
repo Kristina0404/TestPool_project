@@ -38,7 +38,7 @@ public class UsersServiceImpl implements UsersService {
     private final MailTemplatesUtil mailTemplatesUtil;
 
 
-    @Value("${base.url}/testpool-fe/index.html#/auth/login")
+    @Value("${base.url}testpool-fe/index.html#/auth/login")
     private String baseUrl;
 
     @Transactional
@@ -62,7 +62,8 @@ public class UsersServiceImpl implements UsersService {
     private String createLinkForConfirmation(String codeValue) {
         System.out.println("Confirming registration with code: " + codeValue);
         System.out.println("Base URL: " + baseUrl);
-        return baseUrl + "#/confirm.html?id=" + codeValue;
+        //return baseUrl + "#/confirm.html?id=" + codeValue;
+        return baseUrl  + codeValue;
 
     }
 
