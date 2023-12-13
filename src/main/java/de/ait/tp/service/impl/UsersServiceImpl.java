@@ -38,7 +38,8 @@ public class UsersServiceImpl implements UsersService {
     private final MailTemplatesUtil mailTemplatesUtil;
 
 
-    @Value("${base.url}")
+    @Value(value="${base.url}")
+    //@Value("https://testpool-app-3g73f.ondigitalocean.app/testpool-fe/#/confirm/")
     private String baseUrl;
 
     @Transactional
@@ -62,7 +63,8 @@ public class UsersServiceImpl implements UsersService {
     private String createLinkForConfirmation(String codeValue) {
         System.out.println("Confirming registration with code: " + codeValue);
         System.out.println("Base URL: " + baseUrl);
-        return baseUrl + "#/confirm.html?id=" + codeValue;
+        return baseUrl + "api/users/confirm.html?id=" + codeValue;
+
     }
 
     private void saveConfirmCode(String codeValue, User user) {
