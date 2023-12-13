@@ -39,7 +39,7 @@ public class UsersServiceImpl implements UsersService {
 
 
     @Value(value="${base.url}")
-    //@Value("https://testpool-app-3g73f.ondigitalocean.app/testpool-fe/#/confirm/")
+    //@Value("https://testpool-app-3g73f.ondigitalocean.app/testpool-fe/index.html#/confirm/")
     private String baseUrl;
 
     @Transactional
@@ -63,7 +63,7 @@ public class UsersServiceImpl implements UsersService {
     private String createLinkForConfirmation(String codeValue) {
         System.out.println("Confirming registration with code: " + codeValue);
         System.out.println("Base URL: " + baseUrl);
-        return baseUrl + "api/users/confirm.html?id=" + codeValue;
+        return baseUrl + "confirm.html?id=" + codeValue;
 
     }
 
