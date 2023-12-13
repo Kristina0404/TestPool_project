@@ -22,8 +22,5 @@ myapp:
   maxPoints: 10
   maxQuestions: 10
 
-base:
-  url: https://testpool-app-3g73f.ondigitalocean.app/testpool-fe/index.html#/
-
 
 
