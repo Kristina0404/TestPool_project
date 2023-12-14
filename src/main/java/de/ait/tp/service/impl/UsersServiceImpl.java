@@ -38,8 +38,8 @@ public class UsersServiceImpl implements UsersService {
     private final MailTemplatesUtil mailTemplatesUtil;
 
 
-    @Value(value="${base.url}")
-    //@Value("https://testpool-app-3g73f.ondigitalocean.app/testpool-fe/index.html#/confirm/")
+    //@Value(value="${base.url}")
+    @Value("https://testpool-app-3g73f.ondigitalocean.app/testpool-fe/index.html#/")
     private String baseUrl;
 
     @Transactional
